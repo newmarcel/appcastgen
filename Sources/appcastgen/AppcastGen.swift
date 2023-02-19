@@ -11,7 +11,20 @@ import Appcast
 
 @main
 struct AppcastGen: ParsableCommand {
-    @Argument var configurationFilePath: String = Configuration.defaultFileName
+    static let configuration = CommandConfiguration(
+        commandName: "appcastgen",
+        abstract: "appcastgen creates an 'appcast.xml' file from version JSON and Markdown file pairs."
+    )
+    
+    @Argument
+    var configurationFilePath: String = Configuration.defaultFileName
+    
+    @Flag(
+        name: [.customShort("c"), .customLong("channels")],
+        inversion: .prefixedEnableDisable,
+        help: "Add a prerelease channel tag to a version instead of creating multiple 'appcast.xml' files."
+    )
+    var isUseChannelsEnabled: Bool = false
     
     mutating func run() throws {        
         let appcast = try Appcast(fileURL: self.configurationFileURL)
