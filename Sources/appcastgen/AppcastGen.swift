@@ -21,13 +21,39 @@ struct AppcastGen: ParsableCommand {
 
 private extension AppcastGen {
     var configurationFileURL: URL {
-        guard let workingDirectoryURL = Process().currentDirectoryURL else {
-            fatalError("Failed to retrieve current working directory.")
-        }
+        let expandedPath = self.configurationFilePath.expandingTilde
+        let workingDirectoryURL = Process().currentDirectoryURL
+        
+        let url: URL
         if #available(macOS 13.0, *) {
-            return workingDirectoryURL.appending(component: self.configurationFilePath, directoryHint: .notDirectory)
+            url = URL(filePath: expandedPath, directoryHint: .notDirectory, relativeTo: workingDirectoryURL)
         } else {
-            return workingDirectoryURL.appendingPathComponent(self.configurationFilePath)
+            url = URL(fileURLWithPath: expandedPath, isDirectory: false, relativeTo: workingDirectoryURL)
         }
+        return url
+    }
+}
+
+private extension String {
+    var expandingTilde: String {
+        guard self.hasPrefix("~") else { return self }
+        
+        let unprefixedPath: Substring
+        if self.hasPrefix("~/") {
+            unprefixedPath = self.dropFirst(2)
+        } else {
+            unprefixedPath = self.dropFirst()
+        }
+        
+        let homePath: String = {
+            let home = FileManager.default.homeDirectoryForCurrentUser
+            if #available(macOS 13.0, *) {
+                return home.path(percentEncoded: false)
+            } else {
+                return home.path
+            }
+        }()
+        
+        return homePath + unprefixedPath
     }
 }
