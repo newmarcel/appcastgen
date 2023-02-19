@@ -14,13 +14,11 @@ public extension Appcast {
         // Stable Appcast
         let stableContents = self.createLines(for: .stable).joinedLines
         try self.writeContents(stableContents, toFileWithName: baseFileName)
-        print("Finished writing \(baseFileName).")
         
         // PreRelease Appcast
         if self.hasPreReleaseItems {
             let preReleaseContents = self.createLines(for: .preRelease).joinedLines
             try self.writeContents(preReleaseContents, toFileWithName: "prerelease-\(baseFileName)")
-            print("Finished writing prerelease-\(baseFileName).")
         }
     }
 }
@@ -44,6 +42,7 @@ private extension Appcast {
         }()
         
         try contents.write(to: fileURL, atomically: true, encoding: .utf8)
+        print("Finished writing '\(fileURL.path)'.")
     }
 }
 

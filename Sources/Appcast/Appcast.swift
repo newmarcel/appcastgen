@@ -40,5 +40,8 @@ public extension Appcast {
         self.fileURL = fileURL
         self.configuration = configuration
         self.channel = channel
+        
+        print("Using configuration file '\(self.fileURL.path)'…")
+        print("\(configuration.title)\n\(configuration.description)\n")
     }
 }
