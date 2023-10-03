@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.0"),
-        .package(url: "https://github.com/johnsundell/ink.git", from: "0.5.0")
+        .package(url: "https://github.com/mflint/Ink.git", branch: "multiple-depth-list-parsing")
     ],
     targets: [
         .executableTarget(

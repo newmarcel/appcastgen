@@ -3,10 +3,10 @@
     {
       "identity" : "ink",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/ink.git",
+      "location" : "https://github.com/mflint/Ink.git",
       "state" : {
-        "revision" : "77c3d8953374a9cf5418ef0bd7108524999de85a",
-        "version" : "0.5.1"
+        "branch" : "multiple-depth-list-parsing",
+        "revision" : "8d664bffdf68ed30edd993edc39cb70cfbe745e0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
-        "version" : "1.2.2"
+        "revision" : "8f4d2753f0e4778c76d5f05ad16c74f707390531",
+        "version" : "1.2.3"
       }
     }
   ],
